@@ -50,7 +50,17 @@ public class SchemeServerImpl implements ISchemeServer{
 		int numberMax = page.getCount() * page.getNumber();
 		//计算最大序号
 		int numberMin = numberMax - page.getCount();
-		String sql = "SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (SELECT * FROM "+StaticVariable.TABLE_NAME_SCHEME+") A WHERE ROWNUM <= "+numberMax+" ) WHERE RN >= "+numberMin+"";
+		String sql = "";
+		//获取业务种类标识
+		Object varietyType = contextMap.get(StaticVariable.SCHEME_VARIETY_TYPE);
+		if( null != varietyType && !varietyType.toString().isEmpty() ){
+			//存在业务种类区分
+			String varietyTypeStr = varietyType.toString();
+			sql = "SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (SELECT * FROM "+StaticVariable.TABLE_NAME_SCHEME+" WHERE TYPE = '"+varietyTypeStr+"' ) A WHERE ROWNUM <= "+numberMax+" ) WHERE RN >= "+numberMin+"";
+		}else{
+			//不存在业务种类区分
+			sql = "SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (SELECT * FROM "+StaticVariable.TABLE_NAME_SCHEME+") A WHERE ROWNUM <= "+numberMax+" ) WHERE RN >= "+numberMin+"";
+		}
 		List<Scheme> schemeList = jdbcTemplate.query(sql , new SchemeRowMapper());
 		//查询总数
 		long countNumber = jdbcTemplate.queryForLong("SELECT COUNT(0) FROM " + StaticVariable.TABLE_NAME_SCHEME);

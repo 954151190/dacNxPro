@@ -31,6 +31,10 @@ public class ArticleAction extends ActionSupport {
 	 */
 	private String articleType;
 	/**
+	 * 数据类型的二级分类
+	 */
+	private String varietyType;
+	/**
 	 * 数据唯一标识
 	 */
 	private String articleId;
@@ -166,6 +170,7 @@ public class ArticleAction extends ActionSupport {
     		//获取业务
     		Page schemeCardPage = new Page(1 , 20);
     		contextMap.put(StaticVariable.PAGE_SCHEME, schemeCardPage);
+    		contextMap.put(StaticVariable.SCHEME_VARIETY_TYPE, varietyType);
     		this.schemeList = schemeServer.selectEntryList4Page(contextMap);
     		return "schemeList";
     	}else if ( this.articleType.equals("NL") ) {
@@ -443,5 +448,13 @@ public class ArticleAction extends ActionSupport {
 
 	public void setPhoto(Photo photo) {
 		this.photo = photo;
+	}
+
+	public String getVarietyType() {
+		return varietyType;
+	}
+
+	public void setVarietyType(String varietyType) {
+		this.varietyType = varietyType;
 	}
 }

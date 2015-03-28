@@ -109,6 +109,10 @@ public class StaticVariable {
 	 */
 	public static final String PAGE_SCHEME = "PAGE_SCHEME";
 	/**
+	 * 业务-种类标识
+	 */
+	public static final String SCHEME_VARIETY_TYPE ="SCHEME_VARIETY_TYPE";
+	/**
 	 * 业务-银行卡类型分页对象标识
 	 */
 	public static final String PAGE_SCHEME_CARD = "PAGE_SCHEME_CARD";

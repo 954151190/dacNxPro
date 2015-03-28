@@ -43,7 +43,7 @@
 	
 	
 	<!-- 控制层Action -->
-	<bean id="IndexAction" class="com.dacnx.www.action.IndexAction">
+	<bean id="IndexAction" class="com.dacnx.www.action.IndexAction" scope="prototype">
 		<property name="schemeServer">
 			<ref bean="schemeService" />
 		</property>
@@ -63,7 +63,7 @@
 			<ref bean="schemeTypeService" />
 		</property>
 	</bean>
-	<bean id="ArticleAction" class="com.dacnx.www.action.ArticleAction">
+	<bean id="ArticleAction" class="com.dacnx.www.action.ArticleAction" scope="prototype">
 		<property name="schemeServer">
 			<ref bean="schemeService" />
 		</property>

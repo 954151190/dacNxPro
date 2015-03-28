@@ -65,10 +65,10 @@
 			<h2 class="left_title">业务介绍</h2>
 			<div class="leftbg borl_r">
 				<ul class="classul">
-					<li><a href="#">公司系列</a></li>
-					<li><a href="#">个人系列</a></li>
-					<li><a href="#">清算系列</a></li>
-					<li><a href="#">银行卡系列</a></li>
+					<li><a href="toAricleList?articleType=SL&varietyType=b7f2f3e3-53d2-4dc6-87fa-337c75288483">公司系列</a></li>
+					<li><a href="toAricleList?articleType=SL&varietyType=0a55d309-7626-4e25-891c-930f27bb09d5">个人系列</a></li>
+					<li><a href="toAricleList?articleType=SL&varietyType=e4da68c2-a128-4bc0-9d21-b61595fd2d84">清算系列</a></li>
+					<li><a href="toAricleList?articleType=SL&varietyType=0a55d309-7626-4e25-891c-930f27bb09d5">银行卡系列</a></li>
 				</ul>
 			</div>
 			<div class="left_bot"></div>
