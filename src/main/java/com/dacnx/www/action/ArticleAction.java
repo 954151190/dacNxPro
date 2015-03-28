@@ -1,4 +1,5 @@
 package com.dacnx.www.action;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -12,11 +13,13 @@ import com.dacnx.www.entry.Page;
 import com.dacnx.www.entry.Photo;
 import com.dacnx.www.entry.Product;
 import com.dacnx.www.entry.Scheme;
+import com.dacnx.www.entry.SchemeType;
 import com.dacnx.www.server.IBulletinServer;
 import com.dacnx.www.server.INewsServer;
 import com.dacnx.www.server.IPhotoServer;
 import com.dacnx.www.server.IProductServer;
 import com.dacnx.www.server.ISchemeServer;
+import com.dacnx.www.server.ISchemeTypeServer;
 import com.dacnx.www.util.StaticVariable;
 import com.opensymphony.xwork2.ActionSupport;
   
@@ -42,6 +45,10 @@ public class ArticleAction extends ActionSupport {
 	 * 业务服务类
 	 */
     private ISchemeServer schemeServer;
+    /**
+     * 业务类型服务类
+     */
+    private ISchemeTypeServer schemeTypeServer; 
     /**
      * 产品服务类
      */
@@ -71,6 +78,10 @@ public class ArticleAction extends ActionSupport {
      * 业务数据集合-综合
      */
     private List<Scheme> schemeList;
+    /**
+     * 业务数据类型集合
+     */
+    private List< SchemeType > schemeTypeList;
     /**
      * 业务数据集合-公司业务
      */
@@ -171,6 +182,13 @@ public class ArticleAction extends ActionSupport {
     		Page schemeCardPage = new Page(1 , 20);
     		contextMap.put(StaticVariable.PAGE_SCHEME, schemeCardPage);
     		contextMap.put(StaticVariable.SCHEME_VARIETY_TYPE, varietyType);
+    		//获取业务类型
+    		try{
+    			this.schemeTypeList = this.schemeTypeServer.selectEntryList( contextMap );
+    		}catch(Exception ex) {
+    			logger.warn("未获取到业务分类信息");
+    			this.schemeTypeList = new ArrayList<SchemeType>();
+    		}
     		this.schemeList = schemeServer.selectEntryList4Page(contextMap);
     		return "schemeList";
     	}else if ( this.articleType.equals("NL") ) {
@@ -205,6 +223,13 @@ public class ArticleAction extends ActionSupport {
 	    		this.product = productServer.selectEntry4ID(contextMap); 
 	    		return "product";
 	    	}else if( this.articleType.equals("SL") ) {
+	    		//获取业务类型
+	    		try{
+	    			this.schemeTypeList = this.schemeTypeServer.selectEntryList( contextMap );
+	    		}catch(Exception ex) {
+	    			logger.warn("未获取到业务分类信息");
+	    			this.schemeTypeList = new ArrayList<SchemeType>();
+	    		}
 	    		//获取业务数据
 	    		contextMap.put(StaticVariable.MS_SCHEME_OBJECT, this.scheme);
 	    		this.scheme = schemeServer.selectEntry4ID(contextMap);
@@ -456,5 +481,21 @@ public class ArticleAction extends ActionSupport {
 
 	public void setVarietyType(String varietyType) {
 		this.varietyType = varietyType;
+	}
+
+	public ISchemeTypeServer getSchemeTypeServer() {
+		return schemeTypeServer;
+	}
+
+	public void setSchemeTypeServer(ISchemeTypeServer schemeTypeServer) {
+		this.schemeTypeServer = schemeTypeServer;
+	}
+
+	public List<SchemeType> getSchemeTypeList() {
+		return schemeTypeList;
+	}
+
+	public void setSchemeTypeList(List<SchemeType> schemeTypeList) {
+		this.schemeTypeList = schemeTypeList;
 	}
 }

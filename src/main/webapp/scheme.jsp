@@ -67,10 +67,9 @@
 			<h2 class="left_title">业务介绍</h2>
 			<div class="leftbg borl_r">
 				<ul class="classul">
-					<li><a href="#">公司系列</a></li>
-					<li><a href="#">个人系列</a></li>
-					<li><a href="#">清算系列</a></li>
-					<li><a href="#">银行卡系列</a></li>
+					<s:iterator value="schemeTypeList" var="schemeType">
+						<li><a href="toAricleList?articleType=SL&varietyType=${ schemeType.id }">${schemeType.title}</a></li>
+					</s:iterator>
 				</ul>
 			</div>
 			<div class="left_bot"></div>

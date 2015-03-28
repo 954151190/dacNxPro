@@ -79,6 +79,9 @@
 		<property name="photoserver">
 			<ref bean="photoService" />
 		</property>
+		<property name="schemeTypeServer">
+			<ref bean="schemeTypeService" />
+		</property>
 	</bean>
 	<bean id="photoAction" class="com.dacnx.www.action.PhotoAction" scope="prototype"></bean>
 </beans>  
