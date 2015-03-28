@@ -184,7 +184,7 @@ public class ArticleAction extends ActionSupport {
     		contextMap.put(StaticVariable.SCHEME_VARIETY_TYPE, varietyType);
     		//获取业务类型
     		try{
-    			this.schemeTypeList = this.schemeTypeServer.selectEntryList( contextMap );
+    			this.schemeTypeList = this.schemeTypeServer.selectEntryList4IsShow( contextMap );
     		}catch(Exception ex) {
     			logger.warn("未获取到业务分类信息");
     			this.schemeTypeList = new ArrayList<SchemeType>();
@@ -225,7 +225,7 @@ public class ArticleAction extends ActionSupport {
 	    	}else if( this.articleType.equals("SL") ) {
 	    		//获取业务类型
 	    		try{
-	    			this.schemeTypeList = this.schemeTypeServer.selectEntryList( contextMap );
+	    			this.schemeTypeList = this.schemeTypeServer.selectEntryList4IsShow( contextMap );
 	    		}catch(Exception ex) {
 	    			logger.warn("未获取到业务分类信息");
 	    			this.schemeTypeList = new ArrayList<SchemeType>();
