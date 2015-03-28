@@ -25,6 +25,7 @@ public class ProductRowMapper implements RowMapper{
 		product.setAuthor_name( rs.getString("AUTHOR_NAME") );;
 		product.setState(rs.getString("STATE"));
 		product.setCreate_time(new java.util.Date( rs.getDate("CREATE_TIME").getTime() ) );
+		product.setPhoto_id( rs.getString("PHOTO_ID") );
 		return product;
 	}
 }

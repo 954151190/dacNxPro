@@ -17,6 +17,7 @@ public class Product extends Entry implements Serializable{
 	private String state;
 	private String author_name;
 	private String author_id;
+	private String photo_id;
 	
 	/**
 	 * MAP×ª»»Bulletin
@@ -48,6 +49,9 @@ public class Product extends Entry implements Serializable{
 			}
 			if( !isEmpty(dataMap, "AUTHOR_ID") ) {
 				product.setAuthor_id(dataMap.get("AUTHOR_ID").toString());
+			}
+			if( !isEmpty(dataMap, "PHOTO_ID") ) {
+				product.setAuthor_id(dataMap.get("PHOTO_ID").toString());
 			}
 			return product;
 		}else{
@@ -99,5 +103,13 @@ public class Product extends Entry implements Serializable{
 	}
 	public void setAuthor_id(String author_id) {
 		this.author_id = author_id;
+	}
+	
+	public String getPhoto_id() {
+		return photo_id;
+	}
+	
+	public void setPhoto_id(String photo_id) {
+		this.photo_id = photo_id;
 	}
 }
