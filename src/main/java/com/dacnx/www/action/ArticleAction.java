@@ -209,8 +209,9 @@ public class ArticleAction extends ActionSupport {
     		//创建通用山下文对象
         	Map<String,Object> contextMap = new HashMap<String,Object>();
         	//各种业务通用数据查询
-        	//获取首页滚动图片数据集合
+    		//获取首页滚动图片数据集合
     		List<Photo> photoList = photoserver.selectEntryList4Page(contextMap);
+    		this.photoList = photoList;
 	    	//根据业务类型进行不同的查询，跳转到不同的列表页面
 	    	if( this.articleType.equals("BL") ) {
 	    		//获取公示公告数据
