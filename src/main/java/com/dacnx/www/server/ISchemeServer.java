@@ -27,4 +27,10 @@ public interface ISchemeServer {
 	 */
 	public List<Scheme> selectEntryList4Page4Type( Map<String,Object> contextMap );
 	
+	/**
+	 * 查询信息个数
+	 * @param contextMap
+	 */
+	public Long countEntry( Map<String,Object> contextMap );
+	
 }

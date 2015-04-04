@@ -2,6 +2,7 @@ package com.dacnx.www.action;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -145,7 +146,7 @@ public class IndexAction extends ActionSupport {
 		contextMap.put(StaticVariable.DATA_INDEX_PRODUCT, productList);
 		
 		//获取农信要闻数据集合
-		Page newswPersonPage = new Page(1 , 6);
+		Page newswPersonPage = new Page(1 , 5);
 		contextMap.put(StaticVariable.PAGE_NEWS, newswPersonPage);
 		List<News> newsPersonList = newsServer.selectEntryList4Page(contextMap);
 		contextMap.put(StaticVariable.DATA_INDEX_NEWS, newsPersonList);
@@ -165,34 +166,8 @@ public class IndexAction extends ActionSupport {
 			contextMap.put(StaticVariable.PARAMETER_SCHEME_TYPE, st.getId());
 			contextMap.put(StaticVariable.PAGE_SCHEME, schemePage);	
 			List<Scheme> schemeList = schemeServer.selectEntryList4Page4Type(contextMap);
-			this.schemeMap.put(st.getTitle(), schemeList);
+			this.schemeMap.put(st.getTitle() , schemeList);
 		}
-//		//获取业务-银行卡类型数据集合
-//		Page schemeCardPage = new Page(1 , 6);
-//		contextMap.put(StaticVariable.PAGE_SCHEME_CARD, schemeCardPage);
-//		List<Scheme> schemeCardList = schemeServer.selectEntryList4Page(contextMap);
-//		contextMap.put(StaticVariable.DATA_INDEX_SCHEME_CARD, schemeCardList);
-//		
-//		//获取业务-清算类型数据集合
-//		Page schemeClearPage = new Page( 1 , 6 );
-//		contextMap.put(StaticVariable.PAGE_SCHEME_CLEAR, schemeClearPage);
-//		List<Scheme> schemeClearList = schemeServer.selectEntryList4Page(contextMap);
-//		contextMap.put(StaticVariable.DATA_INDEX_SCHEME_CLEAR, schemeClearList);
-//		
-//		//获取业务-公司类型数据集合
-//		Page schemeCompanyPage = new Page( 1 , 6 );
-//		contextMap.put(StaticVariable.PAGE_SCHEME_COMPANY, schemeCompanyPage);
-//		List<Scheme> schemeCompanyList = schemeServer.selectEntryList4Page(contextMap);
-//		contextMap.put(StaticVariable.DATA_INDEX_SCHEME_COMPANY, schemeCompanyList);
-//		
-//		//获取业务-个人类型数据集合
-//		Page schemePersonPage = new Page( 1 , 6 );
-//		contextMap.put(StaticVariable.PAGE_SCHEME_PERSON, schemePersonPage);
-//		List<Scheme> schemePersonList = schemeServer.selectEntryList4Page(contextMap);
-//		contextMap.put(StaticVariable.DATA_INDEX_SCHEME_PERSON, schemePersonList);
-		
-		
-		
     }
     
     /**
@@ -204,14 +179,6 @@ public class IndexAction extends ActionSupport {
     	this.bulletinList = (List<Bulletin>)contextMap.get(StaticVariable.DATA_INDEX_BULLETIN); 
     	//填充产品数据
     	this.productList = (List<Product>)contextMap.get(StaticVariable.DATA_INDEX_PRODUCT);
-    	//填充业务-银行卡类型数据
-    	this.schemeCardList = (List<Scheme>)contextMap.get(StaticVariable.DATA_INDEX_SCHEME_CARD);
-    	//填充业务-清算类型数据
-    	this.schemeClearList = (List<Scheme>)contextMap.get(StaticVariable.DATA_INDEX_SCHEME_CLEAR);
-    	//填充业务-公司类型数据
-    	this.schemeCompanyList = (List<Scheme>)contextMap.get(StaticVariable.DATA_INDEX_SCHEME_COMPANY);
-    	//填充业务-各人类型数据 
-    	this.schemePersonList = (List<Scheme>)contextMap.get(StaticVariable.DATA_INDEX_SCHEME_PERSON);
     	//填充农信要闻数据
     	this.newsList = (List<News>)contextMap.get(StaticVariable.DATA_INDEX_NEWS);
     	//填充图片数据

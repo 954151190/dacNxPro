@@ -19,4 +19,10 @@ public interface IProductServer {
 	 * @return
 	 */
 	public List<Product> selectEntryList4Page( Map<String,Object> contextMap );
+	
+	/**
+	 * 查询信息个数
+	 * @param contextMap
+	 */
+	public Long countEntry( Map<String,Object> contextMap );
 }

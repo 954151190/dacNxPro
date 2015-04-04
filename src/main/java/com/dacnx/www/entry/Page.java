@@ -12,9 +12,9 @@ public class Page {
 		this.count = 20;
 	}
 	
-	public Page( int number , int count ){
-		this.number = number;
-		this.count = count;
+	public Page( int number , int count ) {
+		this.number = 1;
+		this.count = 20;
 	}
 	
 	/**
@@ -26,11 +26,25 @@ public class Page {
 	 * 每页显示条数
 	 */
 	private int count;
-	
+
 	/**
 	 * 信息总数
 	 */
-	private int allCount;
+	private long allCount;
+	
+	/**
+	 * 分页总页数
+	 * @return
+	 */
+	private long allPage;
+	
+	public long getAllCount() {
+		return allCount;
+	}
+
+	public void setAllCount(long allCount) {
+		this.allCount = allCount;
+	}
 
 	public int getNumber() {
 		return number;
@@ -48,11 +62,11 @@ public class Page {
 		this.count = count;
 	}
 
-	public int getAllCount() {
-		return allCount;
+	public long getAllPage() {
+		return allPage;
 	}
 
-	public void setAllCount(int allCount) {
-		this.allCount = allCount;
+	public void setAllPage(long allPage) {
+		this.allPage = allPage;
 	}
 }

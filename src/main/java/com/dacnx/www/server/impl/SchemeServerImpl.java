@@ -56,18 +56,41 @@ public class SchemeServerImpl implements ISchemeServer{
 		if( null != varietyType && !varietyType.toString().isEmpty() ){
 			//存在业务种类区分
 			String varietyTypeStr = varietyType.toString();
-			sql = "SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (SELECT * FROM "+StaticVariable.TABLE_NAME_SCHEME+" WHERE TYPE = '"+varietyTypeStr+"' ) A WHERE ROWNUM <= "+numberMax+" ) WHERE RN >= "+numberMin+"";
+			sql = "SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (SELECT * FROM "+StaticVariable.TABLE_NAME_SCHEME+" WHERE TYPE = '"+varietyTypeStr+"' ) A WHERE ROWNUM <= "+numberMax+" ) WHERE RN > "+numberMin+"";
 		}else{
 			//不存在业务种类区分
-			sql = "SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (SELECT * FROM "+StaticVariable.TABLE_NAME_SCHEME+") A WHERE ROWNUM <= "+numberMax+" ) WHERE RN >= "+numberMin+"";
+			sql = "SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (SELECT * FROM "+StaticVariable.TABLE_NAME_SCHEME+") A WHERE ROWNUM <= "+numberMax+" ) WHERE RN > "+numberMin+"";
 		}
 		List<Scheme> schemeList = jdbcTemplate.query(sql , new SchemeRowMapper());
-		//查询总数
-		long countNumber = jdbcTemplate.queryForLong("SELECT COUNT(0) FROM " + StaticVariable.TABLE_NAME_SCHEME);
-		page.setAllCount( (int)countNumber );
 		return schemeList;
 	}
 	
+	/**
+	 * 查询信息个数
+	 * @param contextMap
+	 */
+	public Long countEntry( Map<String,Object> contextMap ){
+		//获取业务种类标识
+		Object varietyType = contextMap.get(StaticVariable.SCHEME_VARIETY_TYPE);
+		Long retLong = 0L;
+		if( null != varietyType && !varietyType.toString().isEmpty() ){
+			//存在业务种类区分
+			String varietyTypeStr = varietyType.toString();
+			List<Object> whereFields = new ArrayList<Object>();
+			List<Object> values = new ArrayList<Object>();
+			whereFields.add("TYPE");
+			values.add(varietyTypeStr);
+			String countStr = BuildSQLUtil.buildCountSQL(StaticVariable.TABLE_NAME_SCHEME, whereFields.toArray());
+			retLong = jdbcTemplate.queryForLong(countStr,values.toArray());
+		}else{
+			//不存在业务种类区分
+			String countStr = BuildSQLUtil.buildCountAllSQL( StaticVariable.TABLE_NAME_PRODUCT );
+			retLong = jdbcTemplate.queryForLong(countStr);
+		}
+		return retLong;
+	}
+	
+	@Deprecated
 	public List<Scheme> selectEntryList4Page4Type(Map<String, Object> contextMap) {
 		//获取业务类型信息
 		String type = (String)contextMap.get(StaticVariable.PARAMETER_SCHEME_TYPE);
@@ -77,7 +100,7 @@ public class SchemeServerImpl implements ISchemeServer{
 		int numberMax = page.getCount() * page.getNumber();
 		//计算最大序号
 		int numberMin = numberMax - page.getCount();
-		String sql = "SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (SELECT * FROM "+StaticVariable.TABLE_NAME_SCHEME+" WHERE TYPE = '"+type+"') A WHERE ROWNUM <= "+numberMax+" ) WHERE RN >= "+numberMin+"";
+		String sql = "SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (SELECT * FROM "+StaticVariable.TABLE_NAME_SCHEME+" WHERE TYPE = '"+type+"') A WHERE ROWNUM <= "+numberMax+" ) WHERE RN > "+numberMin+"";
 		List<Scheme> schemeList = jdbcTemplate.query(sql , new SchemeRowMapper());
 		//查询总数
 		long countNumber = jdbcTemplate.queryForLong("SELECT COUNT(0) FROM " + StaticVariable.TABLE_NAME_SCHEME);

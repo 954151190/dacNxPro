@@ -43,14 +43,20 @@ public class NewsServerImpl implements INewsServer{
 		Page page = (Page)contextMap.get(StaticVariable.PAGE_NEWS);
 		//计算最大序号
 		int numberMax = page.getCount() * page.getNumber();
-		//计算最大序号
-		int numberMin = numberMax - page.getCount();
-		String sql = "SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (SELECT * FROM "+StaticVariable.TABLE_NAME_NEWS+") A WHERE ROWNUM <= "+numberMax+" ) WHERE RN >= "+numberMin+"";
+		//计算最小序号
+		int numberMin = (page.getNumber()-1) * page.getCount();
+		String sql = "SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (SELECT * FROM "+StaticVariable.TABLE_NAME_NEWS+") A WHERE ROWNUM <= "+numberMax+" ) WHERE RN > "+numberMin+"";
 		List<News> newsList = jdbcTemplate.query(sql , new NewsRowMapper());
-		//查询总数
-		long countNumber = jdbcTemplate.queryForLong("SELECT COUNT(0) FROM " + StaticVariable.TABLE_NAME_NEWS);
-		page.setAllCount( (int)countNumber );
 		return newsList;
+	}
 	
+	/**
+	 * 查询信息个数
+	 * @param contextMap
+	 */
+	public Long countEntry( Map<String,Object> contextMap ){
+		String countStr = BuildSQLUtil.buildCountAllSQL( StaticVariable.TABLE_NAME_PHOTO );
+		Long l = jdbcTemplate.queryForLong(countStr);
+		return l;
 	}
 }

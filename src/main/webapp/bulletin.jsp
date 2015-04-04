@@ -38,10 +38,11 @@
 		<div class="webnav">
 			<ul>
 				<li><a href="toIndex" title="网站首页">网站首页</a></li>
-				<li class="licur"><a href="toAricleList?articleType=BL" title="公示公告">公示公告</a></li>
-				<li><a href="toAricleList?articleType=NL" title="农信要闻">农信要闻</a></li>
-				<li><a href="toAricleList?articleType=PL" title="产品展示">产品展示</a></li>
-				<li><a href="toAricleList?articleType=SL" title="业务介绍">业务介绍</a></li>
+				<li class="licur"><a href="toAricleList?articleType=BL&page.number=1&page.count=15" title="公示公告">公示公告</a></li>
+				<li><a href="toAricleList?articleType=NL&page.number=1&page.count=15" title="农信要闻">农信要闻</a></li>
+				<li><a href="toAricleList?articleType=PL&page.number=1&page.count=15" title="产品展示">产品展示</a></li>
+				<li><a href="toAricleList?articleType=SL&page.number=1&page.count=15" title="业务介绍">业务介绍</a></li>
+				
 				<!-- 
 				<li><a href="#" title="其他模块">其他模块</a></li>
 				<li><a href="#" title="其他模块">其他模块</a></li>
@@ -83,10 +84,6 @@
 				<p class="nets_zd">发布时间：${bulletin.create_time } 作者：${bulletin.author_name }</p>
 				<div class="news_xq">
 					<script id="editor" type="text/plain" style="width:100%;height:500px;">${bulletin.content }</script>
-				<ul class="xq_np">
-					<li><b>上一页：</b><a href="#" title="">但当我第一次坐下来阅读它的全部特性以了解</a></li>
-					<li><b>下一页：</b><a href="#" title="">候，它并没有让我感到开窍。你可以想象的到</a></li>
-				</ul>
 				</div>
 			</div>
 			<div class="page_bot"></div>

@@ -47,11 +47,18 @@ public class ProductServerImpl implements IProductServer {
 		int numberMax = page.getCount() * page.getNumber();
 		//计算最大序号
 		int numberMin = numberMax - page.getCount();
-		String sql = "SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (SELECT * FROM "+StaticVariable.TABLE_NAME_PRODUCT+") A WHERE ROWNUM <= "+numberMax+" ) WHERE RN >= "+numberMin+"";
+		String sql = "SELECT * FROM ( SELECT A.*, ROWNUM RN FROM (SELECT * FROM "+StaticVariable.TABLE_NAME_PRODUCT+") A WHERE ROWNUM <= "+numberMax+" ) WHERE RN > "+numberMin+"";
 		List<Product> productList = jdbcTemplate.query(sql , new ProductRowMapper());
-		//查询总数
-		long countNumber = jdbcTemplate.queryForLong("SELECT COUNT(0) FROM " + StaticVariable.TABLE_NAME_PRODUCT);
-		page.setAllCount( (int)countNumber );
 		return productList;
+	}
+	
+	/**
+	 * 查询信息个数
+	 * @param contextMap
+	 */
+	public Long countEntry( Map<String,Object> contextMap ){
+		String countStr = BuildSQLUtil.buildCountAllSQL( StaticVariable.TABLE_NAME_PRODUCT );
+		Long l = jdbcTemplate.queryForLong(countStr);
+		return l;
 	}
 }

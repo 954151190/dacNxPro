@@ -36,10 +36,10 @@
 		<div class="webnav">
 			<ul>
 				<li><a href="toIndex" title="网站首页">网站首页</a></li>
-				<li><a href=toAricleList?articleType=BL title="公示公告">公示公告</a></li>
-				<li><a href="toAricleList?articleType=NL" title="农信要闻">农信要闻</a></li>
-				<li><a href="toAricleList?articleType=PL" title="产品展示">产品展示</a></li>
-				<li class="licur"><a href="toAricleList?articleType=SL" title="业务介绍">业务介绍</a></li>
+				<li><a href=toAricleList?articleType=BL&page.number=1&page.count=15" title="公示公告">公示公告</a></li>
+				<li><a href="toAricleList?articleType=NL&page.number=1&page.count=15" title="农信要闻">农信要闻</a></li>
+				<li><a href="toAricleList?articleType=PL&page.number=1&page.count=15" title="产品展示">产品展示</a></li>
+				<li class="licur"><a href="toAricleList?articleType=SL&page.number=1&page.count=15" title="业务介绍">业务介绍</a></li>
 				<!-- 
 				<li><a href="#" title="其他模块">其他模块</a></li>
 				<li><a href="#" title="其他模块">其他模块</a></li>
@@ -66,7 +66,7 @@
 			<div class="leftbg borl_r">
 				<ul class="classul">
 					<s:iterator value="schemeTypeList" var="schemeType">
-						<li><a href="toAricleList?articleType=SL&varietyType=${ schemeType.id }">${schemeType.title}</a></li>
+						<li><a href="toAricleList?articleType=SL&varietyType=${ schemeType.id }&page.number=1&page.count=15">${schemeType.title}</a></li>
 					</s:iterator>
 				</ul>
 			</div>
@@ -86,9 +86,14 @@
 					</s:iterator>
 				</ul>
 				<div class="epages">
-					<b class="totle">共12条记录 5页</b><a href="#">上一页</a><a href="#">1</a><a
-						href="#">2</a><b>3</b><a href="#">4</a><a href="#">下一页</a><a
-						href="#">尾页</a>
+					<b class="totle">共${ page.allCount }条记录 当前显示第&nbsp;${ page.number }&nbsp;页 总&nbsp;${ page.allPage }&nbsp;页</b>
+					<a href="javascript:goLastPage();">首页</a>
+					<a href="javascript:pageLast();">上一页</a>
+					<b>${page.number }</b>
+					<a href="javascript:pageNext();">下一页</a>
+					<a href="javascript:goNextPage();">尾页</a>
+					<input type="text" id="pageNumber" value="${ page.number }" style="width: 31px;height: 25px;border: 2px solid #000000; margin-left: 2px;  margin-right: 2px;"/>
+					<a href="javascript:pageGo();">跳转</a>
 				</div>
 			</div>
 			<div class="page_bot"></div>
@@ -108,4 +113,45 @@
 		</div>
 	</div>
 </body>
+<script>
+	var number = "<s:property value='%{page.number}'/>";
+	var count = "<s:property value='%{page.count}'/>";
+	var allPage = "<s:property value='%{page.allPage}'/>";
+	
+	function pageGo() {
+		var goNumber = document.getElementById("pageNumber").value;
+		goNumber = parseInt(goNumber);
+		if( isNaN(goNumber) ||  goNumber <= 0 || goNumber > allPage ) {
+			alert("请输入有效页码")
+		}else{
+			window.location.href="toAricleList?articleType=SL&page.number="+goNumber+"&page.count="+count+"";			
+		}
+	}
+
+	function pageLast() {
+		var goNumber = parseInt( number ) - parseInt(1);
+		if( goNumber > 0 ) {
+			window.location.href="toAricleList?articleType=SL&page.number="+ goNumber +"&page.count="+count+"";
+		}else{
+			alert("没有了，已经是第一页了。");
+		}
+	}
+	
+	function pageNext() {
+		var goNumber = parseInt(number)+parseInt(1);
+		if( goNumber <= allPage) {
+			window.location.href="toAricleList?articleType=SL&page.number="+ goNumber +"&page.count="+count+"";
+		}else{
+			alert("没有了，已经是最有一页了。");
+		}
+	}
+	
+	function goLastPage() {
+		window.location.href="toAricleList?articleType=SL&page.number=1&page.count="+count+"";
+	}
+	
+	function goNextPage() {
+		window.location.href="toAricleList?articleType=SL&page.number="+allPage+"&page.count="+count+"";
+	}
+</script>
 </html>

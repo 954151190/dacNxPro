@@ -36,10 +36,10 @@
 		<div class="webnav">
 			<ul>
 				<li class="licur"><a href="toIndex" title="网站首页">网站首页</a></li>
-				<li><a href="toAricleList?articleType=BL" title="公示公告">公示公告</a></li>
-				<li><a href="toAricleList?articleType=NL" title="农信要闻">农信要闻</a></li>
-				<li><a href="toAricleList?articleType=PL" title="产品展示">产品展示</a></li>
-				<li><a href="toAricleList?articleType=SL" title="业务介绍">业务介绍</a></li>
+				<li><a href="toAricleList?articleType=BL&page.number=1&page.count=15" title="公示公告">公示公告</a></li>
+				<li><a href="toAricleList?articleType=NL&page.number=1&page.count=15" title="农信要闻">农信要闻</a></li>
+				<li><a href="toAricleList?articleType=PL&page.number=1&page.count=15" title="产品展示">产品展示</a></li>
+				<li><a href="toAricleList?articleType=SL&page.number=1&page.count=15" title="业务介绍">业务介绍</a></li>
 				<!-- 
 				<li><a href="#" title="其他模块">其他模块</a></li>
 				<li><a href="#" title="其他模块">其他模块</a></li>

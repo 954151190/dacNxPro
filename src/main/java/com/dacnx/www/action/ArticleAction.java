@@ -126,6 +126,10 @@ public class ArticleAction extends ActionSupport {
      * 首页展示单独对象
      */
     private Photo photo;
+    /**
+     * 分页对象
+     */
+    private Page page;
     
     @Override
     public String execute() throws Exception {
@@ -165,22 +169,37 @@ public class ArticleAction extends ActionSupport {
     	//根据业务类型进行不同的查询，跳转到不同的列表页面
     	if( this.articleType.equals("BL") ) {
     		//获取公示公告数据集合
-        	Page bulletinPage = new Page( 1 ,20 );
-        	contextMap.put(StaticVariable.PAGE_BULLETIN, bulletinPage);
+        	contextMap.put(StaticVariable.PAGE_BULLETIN, this.page);
     		//填充公示公告数据
     		this.bulletinList = bulletinServer.selectEntryList4Page(contextMap);
+    		//查询公示公告总数
+    		Long allCount = bulletinServer.countEntry(contextMap);
+    		this.page.setAllCount(allCount);
+    		//计算总页数
+        	if( (this.page.getAllCount() % this.page.getCount()) != 0) {
+        		this.page.setAllPage( (this.page.getAllCount() / this.page.getCount()) +1 );
+        	}else{
+        		this.page.setAllPage( (this.page.getAllCount() / this.page.getCount())  );
+        	}
     		//填充公示公告数据
     		return "bulletinList";
     	}else if( this.articleType.equals("PL") ){
     		//获取产品数据集合
-    		Page productPage = new Page( 1 , 20 );
-    		contextMap.put(StaticVariable.PAGE_PRODUCT, productPage);
+    		contextMap.put(StaticVariable.PAGE_PRODUCT, this.page);
     		this.productList = productServer.selectEntryList4Page(contextMap); 
+    		//查询公示公告总数
+    		Long allCount = productServer.countEntry(contextMap);
+    		this.page.setAllCount(allCount);
+    		//计算总页数
+        	if( (this.page.getAllCount() % this.page.getCount()) != 0) {
+        		this.page.setAllPage( (this.page.getAllCount() / this.page.getCount()) +1 );
+        	}else{
+        		this.page.setAllPage( (this.page.getAllCount() / this.page.getCount())  );
+        	}
     		return "productList";
     	}else if( this.articleType.equals("SL") ) {
     		//获取业务
-    		Page schemeCardPage = new Page(1 , 20);
-    		contextMap.put(StaticVariable.PAGE_SCHEME, schemeCardPage);
+    		contextMap.put(StaticVariable.PAGE_SCHEME, this.page);
     		contextMap.put(StaticVariable.SCHEME_VARIETY_TYPE, varietyType);
     		//获取业务类型
     		try{
@@ -190,12 +209,29 @@ public class ArticleAction extends ActionSupport {
     			this.schemeTypeList = new ArrayList<SchemeType>();
     		}
     		this.schemeList = schemeServer.selectEntryList4Page(contextMap);
+    		//查询公示公告总数
+    		Long allCount = schemeServer.countEntry(contextMap);
+    		this.page.setAllCount(allCount);
+    		//计算总页数
+        	if( (this.page.getAllCount() % this.page.getCount()) != 0) {
+        		this.page.setAllPage( (this.page.getAllCount() / this.page.getCount()) +1 );
+        	}else{
+        		this.page.setAllPage( (this.page.getAllCount() / this.page.getCount())  );
+        	}
     		return "schemeList";
     	}else if ( this.articleType.equals("NL") ) {
     		//获取农信要闻
-    		Page newsCardPage = new Page(1 , 20);
-    		contextMap.put(StaticVariable.PAGE_NEWS, newsCardPage);
+    		contextMap.put(StaticVariable.PAGE_NEWS, this.page);
     		this.newsList = newsServer.selectEntryList4Page(contextMap);
+    		//查询公示公告总数
+    		Long allCount = newsServer.countEntry(contextMap);
+    		this.page.setAllCount(allCount);
+    		//计算总页数
+        	if( (this.page.getAllCount() % this.page.getCount()) != 0) {
+        		this.page.setAllPage( (this.page.getAllCount() / this.page.getCount()) +1 );
+        	}else{
+        		this.page.setAllPage( (this.page.getAllCount() / this.page.getCount())  );
+        	}
     		return "newsList";
     	}
     	return SUCCESS;
@@ -498,5 +534,13 @@ public class ArticleAction extends ActionSupport {
 
 	public void setSchemeTypeList(List<SchemeType> schemeTypeList) {
 		this.schemeTypeList = schemeTypeList;
+	}
+
+	public Page getPage() {
+		return page;
+	}
+
+	public void setPage(Page page) {
+		this.page = page;
 	}
 }
