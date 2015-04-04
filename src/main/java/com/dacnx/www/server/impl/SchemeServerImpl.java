@@ -84,7 +84,7 @@ public class SchemeServerImpl implements ISchemeServer{
 			retLong = jdbcTemplate.queryForLong(countStr,values.toArray());
 		}else{
 			//不存在业务种类区分
-			String countStr = BuildSQLUtil.buildCountAllSQL( StaticVariable.TABLE_NAME_PRODUCT );
+			String countStr = BuildSQLUtil.buildCountAllSQL( StaticVariable.TABLE_NAME_SCHEME );
 			retLong = jdbcTemplate.queryForLong(countStr);
 		}
 		return retLong;
