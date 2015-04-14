@@ -99,11 +99,6 @@ public class IndexAction extends ActionSupport {
      */
     private Photo photo;
     
-    /**
-     * ´æ´¢Í¼Æ¬µÄÂ·¾¶£¨ÁÙÊ±£©
-     */
-    public static String photoPuth = "C:\\impageManage\\";
-    
     @Override
     public String execute() throws Exception {
     	return SUCCESS;

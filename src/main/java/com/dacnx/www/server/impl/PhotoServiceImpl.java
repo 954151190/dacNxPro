@@ -23,6 +23,7 @@ import com.dacnx.www.entry.Photo;
 import com.dacnx.www.entry.User;
 import com.dacnx.www.server.IPhotoServer;
 import com.dacnx.www.util.BuildSQLUtil;
+import com.dacnx.www.util.Config;
 import com.dacnx.www.util.QueryHelper;
 import com.dacnx.www.util.StaticVariable;
 
@@ -71,7 +72,7 @@ public class PhotoServiceImpl implements IPhotoServer{
 		try {
 			Photo photo = (Photo)contextMap.get(StaticVariable.MS_PHOTO_OBJECT);
 			File inFile = (File)contextMap.get(StaticVariable.MS_PHOTO_FILE_OBJECT);
-			File outFile = new File( IndexAction.photoPuth + photo.getId() + ".jpg" );
+			File outFile = new File( Config.INDEX_PHOTO_PATH + photo.getId() + ".jpg" );
 			InputStream input = new FileInputStream(inFile);
 			OutputStream out = new FileOutputStream(outFile);
 			int temp = 0;
@@ -142,7 +143,7 @@ public class PhotoServiceImpl implements IPhotoServer{
 		try{
 			Photo photo = (Photo)contextMap.get(StaticVariable.MS_PHOTO_OBJECT);
 			//获取文件地址
-			String filePath = IndexAction.photoPuth + photo.getId() + ".jpg";
+			String filePath = Config.INDEX_PHOTO_PATH + photo.getId() + ".jpg";
 			File deleteFile = new File( filePath );
 			if( deleteFile.isFile() && deleteFile.exists() ) {
 				deleteFile.delete();

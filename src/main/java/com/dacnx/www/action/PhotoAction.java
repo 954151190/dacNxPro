@@ -13,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.dacnx.www.entry.Photo;
+import com.dacnx.www.util.Config;
 import com.opensymphony.xwork2.ActionSupport;
   
 /**
@@ -33,16 +34,6 @@ public class PhotoAction extends ActionSupport {
      */
     private String photoType;
     
-    /**
-     * 存储图片的路径（临时）
-     */
-    public static String photoPuth = "C:\\impageManage\\";
-    
-    /**
-     * 产品图片的路径(临时)
-     */
-    public static String productPhotoPath = "C:\\impageManage\\product\\";
-    
     @Override
     public String execute() throws Exception {
     	return SUCCESS;
@@ -54,10 +45,10 @@ public class PhotoAction extends ActionSupport {
     			String photoPath = "";
     			if( "0".equals(photoType) ) {
     				//展示滚动图片
-    				photoPath = photoPuth + this.photo.getId() + ".jpg";
+    				photoPath = Config.INDEX_PHOTO_PATH + this.photo.getId() + ".jpg";
     			}else if( "1".equals(photoType) ) {
     				//展示产品图片
-    				photoPath = productPhotoPath + this.photo.getId();
+    				photoPath = Config.PRODUCT_PHOTO_PATH + this.photo.getId();
     			}
     	        loadPhotoStream(photoPath);
     		} catch (IOException e) {
