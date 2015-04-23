@@ -27,6 +27,15 @@ public class StaticVariable {
 	 * 交互参数标识，表示用户信息对象的KEY
 	 */
 	public static final String MS_USER_OBJECT = "OBJECT_USER";
+	//基础区域
+	/**
+	 * 基础表表名
+	 */
+	public static final String TABLE_NAME_BASIS = "T_CN_BASIS";
+	/**
+	 * 交互参数标识，标识基础信息对象的KEY
+	 */
+	public static final String MS_BASIS_OBJECT = "OBJECT_BASIS";
 	//公示公告区域
 	/**
 	 * 相关表名

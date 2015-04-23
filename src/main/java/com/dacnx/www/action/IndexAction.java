@@ -7,6 +7,7 @@ import java.util.UUID;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.dacnx.www.entry.Basis;
 import com.dacnx.www.entry.Bulletin;
 import com.dacnx.www.entry.News;
 import com.dacnx.www.entry.Page;
@@ -14,6 +15,7 @@ import com.dacnx.www.entry.Photo;
 import com.dacnx.www.entry.Product;
 import com.dacnx.www.entry.Scheme;
 import com.dacnx.www.entry.SchemeType;
+import com.dacnx.www.server.IBasisServer;
 import com.dacnx.www.server.IBulletinServer;
 import com.dacnx.www.server.INewsServer;
 import com.dacnx.www.server.IPhotoServer;
@@ -53,7 +55,10 @@ public class IndexAction extends ActionSupport {
      * 业务类型服务类
      */
     private ISchemeTypeServer schemeTypeServer;
-    
+    /**
+     * 基础信息服务类
+     */
+    private IBasisServer basisServer;
     /**
      * 公示公告数据集合
      */
@@ -98,6 +103,10 @@ public class IndexAction extends ActionSupport {
      * 首页展示单独对象
      */
     private Photo photo;
+    /**
+     * 首页展示基础信息对象
+     */
+    private Basis basis;
     
     @Override
     public String execute() throws Exception {
@@ -128,6 +137,9 @@ public class IndexAction extends ActionSupport {
      * @param contextMap
      */
     private void selectAllDate( Map<String,Object> contextMap ){
+    	//获取基础信息数据
+    	this.basis = basisServer.selectEntry(contextMap);
+    	
     	//获取公示公告数据集合
     	Page bulletinPage = new Page( 1 , 5 );
     	contextMap.put(StaticVariable.PAGE_BULLETIN, bulletinPage);
@@ -316,5 +328,21 @@ public class IndexAction extends ActionSupport {
 
 	public void setSchemeMap(Map<String, List<Scheme>> schemeMap) {
 		this.schemeMap = schemeMap;
+	}
+
+	public Basis getBasis() {
+		return basis;
+	}
+
+	public void setBasis(Basis basis) {
+		this.basis = basis;
+	}
+
+	public IBasisServer getBasisServer() {
+		return basisServer;
+	}
+
+	public void setBasisServer(IBasisServer basisServer) {
+		this.basisServer = basisServer;
 	}
 }

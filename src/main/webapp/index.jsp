@@ -153,10 +153,33 @@
 			<div class="ind_contact">
 				<h2>联系我们</h2>
 				<div class="catacta borl_r">
-					址址：河北大厂农村商业银行股份有限公司<br /> 电话：000-00000000，000-00000000<br />
-					传真:000-00000000
-					<p>&nbsp;</p>
-					<p>&nbsp;</p>
+					<table align="center" width="100%">
+						<tr>
+							<td width="10%"></td>
+							<td align="left" width="30%">址址：</td>
+							<td align="left" width="60%">${ basis.address }</td>
+						</tr>
+						<tr>
+							<td width="10%"></td>
+							<td align="left" width="30%">电话：</td>
+							<td align="left" width="60%">${ basis.phone }</td>
+						</tr>
+						<tr>
+							<td width="10%"></td>
+							<td align="left" width="30%">QQ客服:</td>
+							<td align="left" width="60%">${ basis.qq }</td>
+						</tr>
+						<tr>
+							<td width="10%"></td>
+							<td align="left" width="30%">微信平台:</td>
+							<td align="left" width="60%">${ basis.wx }</td>
+						</tr> 
+						<tr>
+							<td width="10%"></td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr> 
+					</table>
 				</div>
 				<div class="catacta_bot"></div>
 			</div>

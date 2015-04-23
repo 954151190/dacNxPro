@@ -40,7 +40,11 @@
 			<ref bean="jdbcTemplate"/>
 		</property>
 	</bean>
-	
+	<bean id="basisService" class="com.dacnx.www.server.impl.BasisServerImpl">
+		<property name="jdbcTemplate">
+			<ref bean="jdbcTemplate"/>
+		</property>
+	</bean>
 	
 	<!-- 控制层Action -->
 	<bean id="IndexAction" class="com.dacnx.www.action.IndexAction" scope="prototype">
@@ -61,6 +65,9 @@
 		</property>
 		<property name="schemeTypeServer">
 			<ref bean="schemeTypeService" />
+		</property>
+		<property name="basisServer">
+			<ref bean="basisService"/>
 		</property>
 	</bean>
 	<bean id="ArticleAction" class="com.dacnx.www.action.ArticleAction" scope="prototype">
